@@ -4,16 +4,26 @@ INNER JOIN categories AS C
 ON C.CategoryID = P.CategoryID
 Where C.Name = 'Computers';
  
-/* joins: find all product names, product prices, and products ratings that have a rating of 5 */
-SELECT N.Name as ProductName, P.Name as ProductPrices, R.Name as ProductRating
-FROM products AS R 
-ON R.Rating = 
-INNER JOIN reviews as 
-/* joins: find the employee with the most total quantity sold.  use thereviews sum() function and group by */
+SELECT products.Name AS "Product Name", products.Price AS "Product Price" , reviews.Rating
+FROM products 
+INNER JOIN reviews ON reviews.ProductID = products.ProductID
+WHERE rating = 5; 
 
-/* joins: find the name of the department, and the name of the category for Appliances and Games */
+SELECT e.FirstName, e.LastName, Sum(s.Quantity) AS Total
+FROM sales AS s
+INNER JOIN employees AS e ON e.EmployeeID = s.EmployeeID
+GROUP BY e.EmployeeID
+ORDER BY Total DESC
+LIMIT 5;
 
-/* joins: find the product name, total # sold, and total price sold,
- for Eagles: Hotel California --You may need to use SUM() */
+SELECT d.Name as 'Department Name', c.Name as 'Category Name'
+FROM departments as d 
+INNER JOIN categories as c on c.DepartmentID = d.DepartmentID
+WHERE c.name = 'Appliances' or c.name = 'Games';
+
+ SELECT p.Name as 'Product Name', Sum(s.quantity) as 'Total Sold', Sum(s.PricePerUnit * s.Quantity) as 'Total Price'
+ FROM products as p
+ INNER JOIN Sales as s on s.ProductID = p.ProductID
+ WHERE p.ProductID = 97;
 
 /* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
