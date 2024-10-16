@@ -26,20 +26,11 @@ WHERE c.name = 'Appliances' or c.name = 'Games';
  INNER JOIN Sales as s on s.ProductID = p.ProductID
  WHERE p.ProductID = 97;
 
-/* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
-
 SELECT p.Name as 'Product Name', r.reviewer as 'Reviewer Name', r.rating as 'Rating' , r.Comment as 'Comment'
 FROM reviews as r
 INNER JOIN products as p on p.ProductID = r.ProductID
 WHERE p.ProductID = 857 AND r.rating = 1;
 
--- ------------------------------------------ Extra - May be difficult
-/* Your goal is to write a query that serves as an employee sales report.
-This query should return:
--  the employeeID
--  the employee's first and last name
--  the name of each product
--  and how many of that product they sold */
 SELECT e.employeeID as 'Employee ID', e.FirstName as 'First Name', e.LastName as 'Last Name', 
 p.Name as 'Product Name', SUM(s.Quantity) as 'Total Sold'
 FROM sales as s 
